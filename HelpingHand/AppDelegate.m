@@ -17,7 +17,54 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    
+    // Parse set up
+    [Parse setApplicationId:@"uWQEKM1NPv75EaJgaLBRMMPNIzv194LZfBui2zhn"
+                  clientKey:@"0NDI9OZfDx1ocJhZOwXJdVqE4RLTWeqqfFYMXVi1"];
+    
+    // Track usage with Parse
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    // Create a main screen window and set its background color
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window setBackgroundColor:[UIColor whiteColor]];
+    
+    // Initialize the navController
+    BOOL authenticatedUser = [self authenticatedUser];
+    authenticatedUser = FALSE;
+    
+    if (authenticatedUser) {
+        [self pushMainView];
+    }
+    else {
+        [self pushLoginView];
+    }
+    
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // Facebook handles responses when using FB login
+    // attempt to extract a token from the url
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+}
+
+- (void)pushMainView {
+    self.mainViewController = [[MainPageViewController alloc] init];
+    self.navController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
+    self.window.rootViewController = self.navController;
+    [self.window makeKeyAndVisible];
+}
+
+- (void)pushLoginView {
+    self.loginViewController = [[LoginViewController alloc] init];
+    self.navController = [[UINavigationController alloc] initWithRootViewController:self.loginViewController];
+    self.window.rootViewController = self.navController;
+    [self.window makeKeyAndVisible];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -36,6 +83,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [FBAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
