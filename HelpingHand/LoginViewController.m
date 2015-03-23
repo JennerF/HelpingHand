@@ -1,112 +1,84 @@
 //
-//  LoginViewController.m
+//  LogInViewController.m
 //  HelpingHand
 //
-//  Created by JennerPerry on 3/21/15.
+//  Created by JennerPerry on 3/23/15.
 //  Copyright (c) 2015 JennerFelton. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "LogInViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface LoginViewController ()
-@property (strong, nonatomic) IBOutlet FBProfilePictureView *profilePictureView;
-@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@interface LogInViewController ()
+@property (nonatomic, strong) UIImageView *fieldsBackground;
 @end
 
-@implementation LoginViewController
+@implementation LogInViewController
+
+@synthesize fieldsBackground;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-    // Create the Facebook login button and initialize to receive user permissions
-    FBLoginView *loginView = [[FBLoginView alloc] initWithReadPermissions:
-                              @[@"public_profile", @"email", @"user_friends"]];
+    [self.logInView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"MainBG.png"]]];
+    [self.logInView setLogo:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Logo.png"]]];
     
-    // Assign delegate to LoginViewController class
-    loginView.delegate = self;
+    // Set buttons appearance
+    [self.logInView.dismissButton setImage:[UIImage imageNamed:@"Exit.png"] forState:UIControlStateNormal];
+    [self.logInView.dismissButton setImage:[UIImage imageNamed:@"ExitDown.png"] forState:UIControlStateHighlighted];
     
-    // Position of the button
-    loginView.center = self.view.center;
-    [self.view addSubview:loginView];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-// Call method when user information has been fetched
-- (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
-                            user:(id<FBGraphUser>)user {
-    self.profilePictureView.profileID = user.objectID; //NOTE: changed from id to objectID
-    self.nameLabel.text = user.name;
-}
-
-// Logged-in user experience
-- (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
-    self.statusLabel.text = @"You're logged in as";
-}
-
-// Logged-out user experience
-- (void)loginViewShowingLoggedOutUser:(FBLoginView *)loginView {
-    self.profilePictureView.profileID = nil;
-    self.nameLabel.text = @"";
-    self.statusLabel.text= @"You're not logged in!";
-}
-
-// Handle possible errors that can occur during login
-- (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
-    NSString *alertMessage, *alertTitle;
+    [self.logInView.facebookButton setImage:nil forState:UIControlStateNormal];
+    [self.logInView.facebookButton setImage:nil forState:UIControlStateHighlighted];
+    [self.logInView.facebookButton setBackgroundImage:[UIImage imageNamed:@"FacebookDown.png"] forState:UIControlStateHighlighted];
+    [self.logInView.facebookButton setBackgroundImage:[UIImage imageNamed:@"Facebook.png"] forState:UIControlStateNormal];
+    [self.logInView.facebookButton setTitle:@"" forState:UIControlStateNormal];
+    [self.logInView.facebookButton setTitle:@"" forState:UIControlStateHighlighted];
     
-    // If the user performs an action outside of you app to recover,
-    // the SDK provides a message, you just need to surface it.
-    // This handles cases like Facebook password change or unverified Facebook accounts.
-    if ([FBErrorUtility shouldNotifyUserForError:error]) {
-        alertTitle = @"Facebook error";
-        alertMessage = [FBErrorUtility userMessageForError:error];
-        
-        // This code will handle session closures that happen outside of the app
-        // You can take a look at our error handling guide to know more about it
-        // https://developers.facebook.com/docs/ios/errors
-    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession) {
-        alertTitle = @"Session Error";
-        alertMessage = @"Your current session is no longer valid. Please log in again.";
-        
-        // If the user has cancelled a login, we will do nothing.
-        // You can also choose to show the user a message if cancelling login will result in
-        // the user not being able to complete a task they had initiated in your app
-        // (like accessing FB-stored information or posting to Facebook)
-    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
-        NSLog(@"user cancelled login");
-        
-        // For simplicity, this sample handles other errors with a generic message
-        // You can checkout our error handling guide for more detailed information
-        // https://developers.facebook.com/docs/ios/errors
-    } else {
-        alertTitle  = @"Something went wrong";
-        alertMessage = @"Please try again later.";
-        NSLog(@"Unexpected error:%@", error);
-    }
+    [self.logInView.twitterButton setImage:nil forState:UIControlStateNormal];
+    [self.logInView.twitterButton setImage:nil forState:UIControlStateHighlighted];
+    [self.logInView.twitterButton setBackgroundImage:[UIImage imageNamed:@"Twitter.png"] forState:UIControlStateNormal];
+    [self.logInView.twitterButton setBackgroundImage:[UIImage imageNamed:@"TwitterDown.png"] forState:UIControlStateHighlighted];
+    [self.logInView.twitterButton setTitle:@"" forState:UIControlStateNormal];
+    [self.logInView.twitterButton setTitle:@"" forState:UIControlStateHighlighted];
     
-    if (alertMessage) {
-        [[[UIAlertView alloc] initWithTitle:alertTitle
-                                    message:alertMessage
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
-    }
+    [self.logInView.signUpButton setBackgroundImage:[UIImage imageNamed:@"Signup.png"] forState:UIControlStateNormal];
+    [self.logInView.signUpButton setBackgroundImage:[UIImage imageNamed:@"SignupDown.png"] forState:UIControlStateHighlighted];
+    [self.logInView.signUpButton setTitle:@"" forState:UIControlStateNormal];
+    [self.logInView.signUpButton setTitle:@"" forState:UIControlStateHighlighted];
+    
+    // Add login field background
+    fieldsBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LoginFieldBG.png"]];
+    [self.logInView addSubview:self.fieldsBackground];
+    [self.logInView sendSubviewToBack:self.fieldsBackground];
+    
+    // Remove text shadow
+    CALayer *layer = self.logInView.usernameField.layer;
+    layer.shadowOpacity = 0.0f;
+    layer = self.logInView.passwordField.layer;
+    layer.shadowOpacity = 0.0f;
+    
+    // Set field text color
+    [self.logInView.usernameField setTextColor:[UIColor colorWithRed:135.0f/255.0f green:118.0f/255.0f blue:92.0f/255.0f alpha:1.0]];
+    [self.logInView.passwordField setTextColor:[UIColor colorWithRed:135.0f/255.0f green:118.0f/255.0f blue:92.0f/255.0f alpha:1.0]];
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    // Set frame for elements
+    [self.logInView.dismissButton setFrame:CGRectMake(10.0f, 10.0f, 87.5f, 45.5f)];
+    [self.logInView.logo setFrame:CGRectMake(66.5f, 70.0f, 187.0f, 58.5f)];
+    [self.logInView.facebookButton setFrame:CGRectMake(35.0f, 287.0f, 120.0f, 40.0f)];
+    [self.logInView.twitterButton setFrame:CGRectMake(35.0f+130.0f, 287.0f, 120.0f, 40.0f)];
+    [self.logInView.signUpButton setFrame:CGRectMake(35.0f, 385.0f, 250.0f, 40.0f)];
+    [self.logInView.usernameField setFrame:CGRectMake(35.0f, 145.0f, 250.0f, 50.0f)];
+    [self.logInView.passwordField setFrame:CGRectMake(35.0f, 195.0f, 250.0f, 50.0f)];
+    [self.fieldsBackground setFrame:CGRectMake(35.0f, 145.0f, 250.0f, 100.0f)];
 }
-*/
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
 
 @end

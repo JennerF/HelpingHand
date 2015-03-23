@@ -31,15 +31,7 @@
     [self.window setBackgroundColor:[UIColor whiteColor]];
     
     // Initialize the navController
-    BOOL authenticatedUser = [self authenticatedUser];
-    authenticatedUser = FALSE;
-    
-    if (authenticatedUser) {
-        [self pushMainView];
-    }
-    else {
-        [self pushLoginView];
-    }
+    [self pushSignInView];
     
     return YES;
 }
@@ -53,16 +45,16 @@
     return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
 }
 
-- (void)pushMainView {
-    self.mainViewController = [[MainPageViewController alloc] init];
-    self.navController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
+- (void)pushSignInView {
+    self.signInView = [[SignInViewController alloc] init];
+    self.navController = [[UINavigationController alloc] initWithRootViewController:self.signInView];
     self.window.rootViewController = self.navController;
     [self.window makeKeyAndVisible];
 }
 
-- (void)pushLoginView {
-    self.loginViewController = [[LoginViewController alloc] init];
-    self.navController = [[UINavigationController alloc] initWithRootViewController:self.loginViewController];
+- (void)pushMainPageView {
+    self.mainPageView = [[MainPageViewController alloc] init];
+    self.navController = [[UINavigationController alloc] initWithRootViewController:self.mainPageView];
     self.window.rootViewController = self.navController;
     [self.window makeKeyAndVisible];
 }

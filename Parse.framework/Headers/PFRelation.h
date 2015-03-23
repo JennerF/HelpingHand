@@ -1,61 +1,44 @@
 //
 //  PFRelation.h
+//  Parse
 //
-//  Copyright 2011-present Parse Inc. All rights reserved.
+//  Created by Shyam Jayaraman on 5/11/12.
+//  Copyright (c) 2012 Parse Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
-#if TARGET_OS_IPHONE
-#import <Parse/PFNullability.h>
-#import <Parse/PFObject.h>
-#import <Parse/PFQuery.h>
-#else
-#import <ParseOSX/PFNullability.h>
-#import <ParseOSX/PFObject.h>
-#import <ParseOSX/PFQuery.h>
-#endif
-
-PF_ASSUME_NONNULL_BEGIN
+#import "PFObject.h"
+#import "PFQuery.h"
 
 /*!
- The `PFRelation` class that is used to access all of the children of a many-to-many relationship.
- Each instance of `PFRelation` is associated with a particular parent object and key.
+ A class that is used to access all of the children of a many-to-many relationship.  Each instance
+ of PFRelation is associated with a particular parent object and key.
  */
 @interface PFRelation : NSObject
 
+@property (nonatomic, retain) NSString *targetClass;
+
+
+#pragma mark Accessing objects
 /*!
- @abstract The name of the class of the target child objects.
+ @return A ParseQuery that can be used to get objects in this relation.
  */
-@property (nonatomic, strong) NSString *targetClass;
+- (PFQuery *)query;
 
-///--------------------------------------
-/// @name Accessing Objects
-///--------------------------------------
 
-/*!
- @abstract Returns a <PFQuery> object that can be used to get objects in this relation.
- */
-- (PF_NULLABLE PFQuery *)query;
-
-///--------------------------------------
-/// @name Modifying Relations
-///--------------------------------------
+#pragma mark Modifying relations
 
 /*!
- @abstract Adds a relation to the passed in object.
-
- @param object A <PFObject> object to add relation to.
+ Adds a relation to the passed in object.
+ @param object ParseObject to add relation to.
  */
 - (void)addObject:(PFObject *)object;
 
 /*!
- @abstract Removes a relation to the passed in object.
-
- @param object A <PFObject> object to add relation to.
+ Removes a relation to the passed in object.
+ @param object ParseObject to add relation to.
  */
 - (void)removeObject:(PFObject *)object;
-
 @end
 
-PF_ASSUME_NONNULL_END
+

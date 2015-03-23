@@ -1,5 +1,5 @@
 //
-//  LogInViewController.h
+//  SignUpViewController.h
 //  HelpingHand
 //
 //  Created by JennerPerry on 3/23/15.
@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/PFLogInViewController.h>
+#import <Parse/PFSignUpViewController.h>
 
-@interface LogInViewController : PFLogInViewController
+@interface SignUpViewController : PFSignUpViewController
 
 @end

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/PFLogInViewController.h>
+#import <Parse/PFSignUpViewController.h>
 
 @interface MainPageViewController : UIViewController
+
+@property (nonatomic, strong) IBOutlet UILabel *welcomeLabel;
+
 
 @end
