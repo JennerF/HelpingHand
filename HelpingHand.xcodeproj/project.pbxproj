@@ -52,10 +52,10 @@
 /* Begin PBXFileReference section */
 		E90CD9EC1ABFF7BF0004C1DC /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		E90CD9ED1ABFF7BF0004C1DC /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
-		E90CD9EF1ABFF9150004C1DC /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		E90CD9F01ABFF9150004C1DC /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
 		E90CD9F21ABFF9D80004C1DC /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		E90CD9F31ABFF9D80004C1DC /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		E90CD9F51AC00D4A0004C1DC /* LogInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		E94A4CC81ABE0D8F00E928B6 /* HelpingHand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelpingHand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E94A4CCC1ABE0D8F00E928B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E94A4CCD1ABE0D8F00E928B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -209,7 +209,7 @@
 				E94A4CFD1ABE1DEA00E928B6 /* MainPageViewController.m */,
 				E90CD9EC1ABFF7BF0004C1DC /* SignInViewController.h */,
 				E90CD9ED1ABFF7BF0004C1DC /* SignInViewController.m */,
-				E90CD9EF1ABFF9150004C1DC /* LogInViewController.h */,
+				E90CD9F51AC00D4A0004C1DC /* LogInViewController.h */,
 				E90CD9F01ABFF9150004C1DC /* LogInViewController.m */,
 				E90CD9F21ABFF9D80004C1DC /* SignUpViewController.h */,
 				E90CD9F31ABFF9D80004C1DC /* SignUpViewController.m */,
