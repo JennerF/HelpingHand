@@ -23,8 +23,14 @@
     [Parse setApplicationId:@"uWQEKM1NPv75EaJgaLBRMMPNIzv194LZfBui2zhn"
                   clientKey:@"0NDI9OZfDx1ocJhZOwXJdVqE4RLTWeqqfFYMXVi1"];
     
+    // Initialize Parse's Facebook Utilities singleton. This uses the FacebookAppID we specified in our App bundle's plist.
+    [PFFacebookUtils initializeFacebook];
+    
     // Track usage with Parse
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    
+    
     
     // Create a main screen window and set its background color
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -42,7 +48,7 @@
          annotation:(id)annotation {
     // Facebook handles responses when using FB login
     // attempt to extract a token from the url
-    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication withSession:[PFFacebookUtils session]];
 }
 
 - (void)pushSignInView {
