@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "SignInViewController.h"
+#import "NotificationsViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -16,6 +17,8 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) SignInViewController *signInView;
 @property (strong, nonatomic) MainPageViewController *mainPageView;
+@property (strong, nonatomic) NotificationsViewController *notificationsPageView;
+@property (strong, nonatomic) UITabBarController *tabBar;
 
 -(void) pushMainPageView;
 

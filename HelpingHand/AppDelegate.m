@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "User.h"
+#import "VolunteerOpportunity.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +20,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    // Register subclasses
+    [User registerSubclass];
+    [VolunteerOpportunity registerSubclass];
     
     // Parse set up
     [Parse setApplicationId:@"uWQEKM1NPv75EaJgaLBRMMPNIzv194LZfBui2zhn"
@@ -29,14 +34,11 @@
     // Track usage with Parse
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    
-    
-    
     // Create a main screen window and set its background color
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window setBackgroundColor:[UIColor whiteColor]];
     
-    // Initialize the navController
+    // go to login page (it will redirect if signed in)
     [self pushSignInView];
     
     return YES;

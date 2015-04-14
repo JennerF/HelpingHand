@@ -1,5 +1,4 @@
 NEXT TIME
-- Decide how to store activities data (is there a way for FB to store or do I use parse?)
 - Decide on features for messaging/tasks/ratings
 
 
@@ -14,3 +13,21 @@ What needs to get done:
 - Figure out which FB features are needed
 - Test to make sure FB connect works
 - Plan out remaining features
+
+- General Layout
+- Wall of "events near you"
+- Settings "preferred"
+- Creating an event
+- Messaging?
+- Points?
+- Recurring events
+
+
+- Event
+    - Owner
+    - Creation Date
+    - Event Date
+    - Event Category
+    - Number of people needed (and total)
+    - Description of event
+    - Location of event

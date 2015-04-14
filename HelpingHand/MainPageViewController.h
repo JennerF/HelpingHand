@@ -10,9 +10,9 @@
 #import <Parse/PFLogInViewController.h>
 #import <Parse/PFSignUpViewController.h>
 
-@interface MainPageViewController : UIViewController
+@interface MainPageViewController : UITableViewController
 
-@property (nonatomic, strong) IBOutlet UILabel *welcomeLabel;
-
+@property (nonatomic, strong) NSMutableArray *cellDescription;
+@property (nonatomic, strong) NSMutableArray *cellPicture;
 
 @end

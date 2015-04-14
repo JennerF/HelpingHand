@@ -52,6 +52,9 @@
     // If the user is already logged in, we go straight to the main page.
     else {
         // Call MainPage function from the AppDelegate
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        [appDelegate.window setRootViewController:appDelegate.tabBar];
+        
         [(AppDelegate *)[[UIApplication sharedApplication] delegate] pushMainPageView];
 
     }
